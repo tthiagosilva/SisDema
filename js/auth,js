@@ -1,0 +1,27 @@
+// auth.js
+
+document.getElementById("form-login").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const email = document.getElementById("login-email").value.trim();
+  const senha = document.getElementById("login-senha").value.trim();
+  const erro = document.getElementById("login-erro");
+
+  firebase.auth().signInWithEmailAndPassword(email, senha)
+    .then(() => {
+      erro.textContent = "";
+      window.location.href = "index.html"; // Redireciona para o painel
+    })
+    .catch((err) => {
+      erro.textContent = "Erro no login: " + traduzirErro(err.code);
+    });
+});
+
+function traduzirErro(codigo) {
+  switch (codigo) {
+    case "auth/user-not-found": return "Usuário não encontrado.";
+    case "auth/wrong-password": return "Senha incorreta.";
+    case "auth/invalid-email": return "E-mail inválido.";
+    default: return "Erro desconhecido.";
+  }
+}

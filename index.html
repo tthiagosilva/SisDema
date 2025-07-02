@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gerenciador de Demandas</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- Painel lateral -->
+    <aside class="sidebar">
+      <h2>Painel de Controle</h2>
+      <nav>
+        <ul>
+          <li><a href="#" class="aba" data-aba="registrar">📝 Registrar</a></li>
+          <li><a href="#" class="aba" data-aba="visualizar">📋 Demandas</a></li>          
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Conteúdo principal -->
+    <main class="conteudo">
+  <!-- Aba: visualizar -->
+  <section id="aba-visualizar" class="aba-conteudo">
+    <h1>Demandas</h1>
+
+    <div class="filtro-container">
+      <label for="filtro-status">Filtrar por status:</label>
+      <select id="filtro-status">
+        <option value="Todos">📋 Todos</option>
+        <option value="Pendente">📌 Pendentes</option>
+        <option value="Em andamento">🔧 Em andamento</option>
+        <option value="Resolvida">✅ Resolvidas</option>
+      </select>
+    </div>
+
+    <div id="lista-demandas"></div>
+  </section>
+
+  <!-- Aba: registrar -->
+  <section id="aba-registrar" class="aba-conteudo" style="display: none; text-align: left;">
+  <h1>📝 Registrar Nova Demanda</h1>
+
+  <div class="card-form">    
+    <form id="form-demanda">
+      <div class="campo-form">
+        <label for="nome">👤 Nome:</label>
+        <input type="text" id="nome" placeholder="Digite seu nome" required />
+      </div>
+
+      <div class="campo-form">
+        <label for="titulo">📌 Título da Demanda:</label>
+        <input type="text" id="titulo" placeholder="Ex: Computador com erro" required />
+      </div>
+
+      <div class="campo-form">
+        <label for="descricao">📝 Descrição:</label>
+        <textarea id="descricao" placeholder="Descreva o problema" required></textarea>
+      </div>
+
+      <div class="campo-form">
+        <label for="ramal">📞 Ramal do Setor:</label>
+        <input type="text" id="ramal" placeholder="Ex: 203" required />
+      </div>
+
+      <button type="submit">Salvar Demanda ✅</button>
+    </form>
+  </div>
+</section>
+
+</main>
+</div>
+
+
+<!-- Modal de confirmação -->
+<div id="modal-excluir" class="modal" style="display: none;">
+  <div class="modal-conteudo">
+    <p>❗ Tem certeza que deseja excluir esta demanda?</p>
+    <div class="modal-botoes">
+      <button id="btn-confirmar-exclusao" class="btn-confirmar">Sim, excluir</button>
+      <button id="btn-cancelar-exclusao" class="btn-cancelar">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast de feedback -->
+<div id="toast" class="toast">Demanda registrada com sucesso!</div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+  
+  <!-- Seu script -->
+<!--<script src="script.js"></script> -->
+<script src="js/firebase-config.js"></script>
+<script src="js/registro.js"></script>
+<script src="js/visualizacao.js"></script>
+<script src="js/status.js"></script>
+<script src="js/main.js"></script>  
+<script src="js/modal.js"></script>
+<script src="js/protecao.js"></script>
+
+
+</body>
+</html>
