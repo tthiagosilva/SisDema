@@ -1,11 +1,14 @@
-// auth.js
+// auth.js - Corrigido com IDs corretos
 
-document.getElementById("form-login").addEventListener("submit", function (e) {
+document.getElementById("login-form").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const email = document.getElementById("login-email").value.trim();
-  const senha = document.getElementById("login-senha").value.trim();
-  const erro = document.getElementById("login-erro");
+  const email = document.getElementById("email").value.trim();
+  const senha = document.getElementById("senha").value.trim();
+  const erro = document.getElementById("erro-login");
+
+  // Limpa mensagens de erro anteriores
+  erro.textContent = "";
 
   firebase.auth().signInWithEmailAndPassword(email, senha)
     .then(() => {
@@ -22,6 +25,9 @@ function traduzirErro(codigo) {
     case "auth/user-not-found": return "Usuário não encontrado.";
     case "auth/wrong-password": return "Senha incorreta.";
     case "auth/invalid-email": return "E-mail inválido.";
-    default: return "Erro desconhecido.";
+    case "auth/too-many-requests": return "Muitas tentativas. Tente novamente mais tarde.";
+    case "auth/user-disabled": return "Usuário desabilitado.";
+    default: return "Erro desconhecido: " + codigo;
   }
 }
+
